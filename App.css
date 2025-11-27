@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* =========================================
+   MASTER THEME VARIABLES
+   ========================================= */
+
+/* --- BRAND THEME (Varsayılan / Proje Teması) --- */
+:root, [data-theme='brand'] {
+  /* Zeminler */
+  --bg-app: #F2F2F0;       /* Kağıt/Krem rengi */
+  --bg-card: #FFFFFF;      /* Kartlar Beyaz */
+  --bg-elevated: #E5E5E5;  /* Hafif gri alanlar (tablo satırları vb.) */
+  --input-bg: #FFFFFF;
+  
+  /* Sidebar (Login'deki Petrol Yeşili) */
+  --sidebar-bg: #1A3C34;   
+  --sidebar-text: #FFFFFF;
+  --sidebar-hover: #2C5F52;
+
+  /* Diğer renkler... */
+  --bg-app: #F2F2F0;
+  --text-primary: #000000;
+  /* ... */
+
+  /* Çizgiler (SİYAH KURALI) */
+  --border-color: #000000;
+  --radius: 8px;
+
+  /* Aksan (Login Butonu - Mercan) */
+  --primary-accent: #FF6B58; 
+  --focus-ring-color: #FF6B58;
+
+  /* Yazılar */
+  --text-primary: #000000;
+  --text-secondary: #4A4A4A;
+  --text-muted: #737373;
+}
+
+/* --- MIDNIGHT THEME (Gece Modu) --- */
+[data-theme='midnight'] {
+  --bg-app: #0f172a;
+  --bg-card: #1e293b;
+  --bg-elevated: #334155;
+  --input-bg: #1e293b;
+  
+  --sidebar-bg: #020617;
+  --sidebar-text: #e2e8f0;
+  --sidebar-hover: #1e293b;
+
+  --border-color: #334155;
+  --radius: 12px;
+
+  --primary-accent: #3b82f6;
+  --focus-ring-color: #3b82f6;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+}
+
+/* =========================================
+   GLOBAL STYLES & RESETS
+   ========================================= */
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+/* Kartların ve Kutuların Siyah Çizgisi */
+.card, .stat-card, .bg-card, .bg-white {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  box-shadow: none !important;
+}
+
+/* Tablo Ayarları */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border-bottom: 1px solid var(--border-color) !important;
+  padding: 12px;
+  color: var(--text-primary) !important;
+}
+
+th {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  background-color: transparent !important; /* Şeffaf başlık */
+}
+
+/* Inputlar - Siyah Çizgili */
+input, select, textarea {
+  background-color: var(--input-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--radius);
+}
+
+input:focus, select:focus {
+  outline: none !important;
+  border-color: var(--primary-accent) !important;
+  box-shadow: 0 0 0 1px var(--primary-accent) !important;
+}
+
+/* Placeholder renkleri */
+::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.7;
+}
+
+/* =========================================
+   SIDEBAR ACİL KURTARMA PAKETİ
+   (Tailwind derlemesini beklemeden rengi zorlar)
+   ========================================= */
+
+/* Sidebar'ın kendisini zorla boya */
+aside, .sidebar {
+  background-color: var(--sidebar-bg) !important; /* Petrol Yeşili */
+  color: var(--sidebar-text) !important;          /* Beyaz Yazı */
+  border-right: 1px solid var(--border-color) !important;
+}
+
+/* Sidebar içindeki tüm link ve yazıları beyaz yap */
+aside a, 
+aside button, 
+aside .nav-item,
+aside h1, 
+aside p {
+  color: var(--sidebar-text) !important;
+}
+
+/* Menü üzerine gelince (Hover) rengi değiştir */
+aside .nav-item:hover {
+  background-color: var(--sidebar-hover) !important;
+  color: #ffffff !important;
+}
+
+/* Aktif menü elemanı */
+aside .bg-sidebar-hover {
+  background-color: var(--sidebar-hover) !important;
+  color: #ffffff !important;
+}
+
+/* =========================================
+   MAVİ RENGİ YOK ETME & MODAL GÜÇLENDİRME
+   ========================================= */
+
+/* 1. SEÇİM RENGİ (Text Selection) */
+::selection {
+  background-color: var(--primary-accent); /* Mercan Rengi */
+  color: white;
+}
+
+/* 2. DROPDOWN SEÇİLİ ÖĞE (Select Option) */
+/* Standart Select */
+option:checked {
+  background-color: var(--sidebar-bg) !important; /* Petrol Yeşili */
+  color: white !important;
+}
+
+/* Custom Select (Radix/Shadcn UI için) */
+[role="option"][aria-selected="true"],
+[data-state="checked"],
+[data-highlighted] {
+  background-color: var(--sidebar-bg) !important; /* Petrol Yeşili */
+  color: white !important; 
+}
+
+/* Dropdown Focus Ring */
+button[role="combobox"]:focus, 
+div[role="dialog"]:focus {
+  ring-color: var(--primary-accent) !important;
+  border-color: var(--primary-accent) !important;
+  outline-color: var(--primary-accent) !important;
+}
+
+/* 3. INPUT FOCUS (Daha Keskin) */
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary-accent) !important;
+  box-shadow: 0 0 0 1px var(--primary-accent) !important;
+}
+
+/* 4. CHECKBOX VE RADIO */
+input[type="checkbox"]:checked, 
+input[type="radio"]:checked {
+  background-color: var(--primary-accent) !important;
+  border-color: var(--primary-accent) !important;
+  color: white !important;
+}
